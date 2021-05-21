@@ -15,16 +15,17 @@ function Products() {
   const [status, setStatus] = useState([]);
 
   useEffect(() => {
-    fetch("/test/api/properties/").then(async (response) => {
-      try {
-        const data = await response.json();
-        setResult(data);
-        setStatus(data);
-      } catch (error) {
-        console.log("Error happened here!");
-        console.error(error);
-      }
-    });
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("test/api/properties/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setResult(result);
+        setStatus(result);
+      })
+      .catch((error) => console.log("error", error));
   }, []);
 
   let Available = result.filter((item) => item.status_id === 1);
