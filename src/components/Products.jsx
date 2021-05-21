@@ -18,7 +18,6 @@ function Products() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      mode:"no-cors",
     };
     fetch("test/api/properties/", requestOptions)
       .then((response) => response.json())
