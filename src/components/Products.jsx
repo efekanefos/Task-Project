@@ -18,6 +18,7 @@ function Products() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
+      mode:"no-cors",
     };
     fetch("https://wizio.co.uk/test/api/properties/", requestOptions)
       .then((response) => response.json())
