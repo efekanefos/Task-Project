@@ -150,12 +150,12 @@ function Products() {
                       className="form-check-input border-info"
                       type="radio"
                       name="flexRadioDefault"
-                      id="flexRadioDefault1"
+                      id="flexRadioDefault2"
                       onClick={onReserved}
                     />
                     <label
                       className="form-check-label"
-                      htmlFor="flexRadioDefault1"
+                      htmlFor="flexRadioDefault2"
                     >
                       Reserved
                     </label>
@@ -168,12 +168,12 @@ function Products() {
                     className="form-check-input border-info"
                     type="radio"
                     name="flexRadioDefault"
-                    id="flexRadioDefault1"
+                    id="flexRadioDefault3"
                     onClick={onSold}
                   />
                   <label
                     className="form-check-label"
-                    htmlFor="flexRadioDefault1"
+                    htmlFor="flexRadioDefault3"
                   >
                     Sold
                   </label>
@@ -183,12 +183,12 @@ function Products() {
                     className="form-check-input border-info"
                     type="radio"
                     name="flexRadioDefault"
-                    id="flexRadioDefault1"
+                    id="flexRadioDefault4"
                     onClick={onNotReleased}
                   />
                   <label
                     className="form-check-label"
-                    htmlFor="flexRadioDefault1"
+                    htmlFor="flexRadioDefault4"
                   >
                     Not Released
                   </label>
