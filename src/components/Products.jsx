@@ -19,7 +19,7 @@ function Products() {
       method: "GET",
       redirect: "follow",
     };
-    fetch("https://wizio.co.uk/test/api/properties/", requestOptions)
+    fetch("test/api/properties/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setResult(result);
