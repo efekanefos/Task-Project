@@ -19,7 +19,7 @@ function Products() {
       method: "GET",
       redirect: "follow",
     };
-    fetch("test/api/properties/", requestOptions)
+    fetch("https://wizio.co.uk/test/api/properties/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setResult(result);
@@ -203,6 +203,22 @@ function Products() {
 }
 
 export default Products;
+
+/*
+var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("https://wizio.co.uk/test/api/properties/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        result.header("Access-Control-Allow-Origin", "*");
+      result.header("Access-Control-Allow-Methods", "GET");
+        setResult(result);
+        setStatus(result);
+      })
+      .catch((error) => console.log("error", error));
+*/
 
 /*
 fetch("url").then(async response => {
