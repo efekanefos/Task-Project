@@ -15,17 +15,16 @@ function Products() {
   const [status, setStatus] = useState([]);
 
   useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    fetch("/test/api/properties/", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setResult(result);
-        setStatus(result);
-      })
-      .catch((error) => console.log("error", error));
+    fetch("/test/api/properties/").then(async (response) => {
+      try {
+        const data = await response.json();
+        setResult(data);
+        setStatus(data);
+      } catch (error) {
+        console.log("Error happened here!");
+        console.error(error);
+      }
+    });
   }, []);
 
   let Available = result.filter((item) => item.status_id === 1);
@@ -205,74 +204,26 @@ function Products() {
 export default Products;
 
 /*
-<div className="col-md-2">
-                <h1>{item.code}</h1>
-              </div>
-useEffect(() => {
-    fetch("https://wizio.co.uk/test/api/properties/")
-      .then((results) => results.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
+fetch("url").then(async response => {
+      try {
+       const data = await response.json()
+       console.log('response data?', data)
+     } catch(error) {
+       console.log('Error happened here!')
+       console.error(error)
+     }
+    })
 */
 /*
-const objectArray = Object.entries(numbers);
-
-objectArray.forEach(([key, value]) => {
-  console.log(key); // 'one'
-  console.log(value); // 1
-});
-*/
-
-/*
-
-<div className="col-md-5">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-                onClick={onConsole}
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Avaible
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-                onClick={onConsole2}
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Reserved
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Sold
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Not Released
-              </label>
-            </div>
-          </div>
+var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("/test/api/properties/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setResult(result);
+        setStatus(result);
+      })
+      .catch((error) => console.log("error", error));
 */
