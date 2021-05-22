@@ -4,3 +4,11 @@
 body {
   background-color: #f0f0f0;
 }
+/*
+#afterHover {
+  display: none !important;
+}
+.list-group-item:hover ~ #afterHover {
+  display: block !important;
+}
+*/
