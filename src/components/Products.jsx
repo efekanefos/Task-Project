@@ -11,10 +11,25 @@ import bed3pool from "../property_thumbs/3-bed-pool/i1.jpg";
 import studio from "../property_thumbs/studio/i1.jpg";
 
 function Products() {
-  const [itemLimit, setItemLimit] = useState(4);
+  const [oneAptLimit, setOneAptLimit] = useState(4);
+  const [searchQuery, setSearchQuery] = useState("");
   const [result, setResult] = useState([]);
   const [status, setStatus] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const onSearch = (e) => {
+    setSearchQuery(e.target.value);
+    console.log(searchQuery);
+  };
+
+  let filteredHomes = result.filter((item) => {
+    return item.code.toUpperCase().indexOf(searchQuery.toUpperCase()) !== -1;
+  });
+
+  const searchFunction = () => {
+    setStatus(filteredHomes);
+    console.log(filteredHomes);
+  };
 
   useEffect(() => {
     var requestOptions = {
@@ -84,7 +99,7 @@ function Products() {
   Filtering by RoomType End
   */
   let on1BedApt = () => {
-    setStatus(oneBedApt.splice(0, itemLimit));
+    setStatus(oneBedApt.splice(0, oneAptLimit));
   };
   let on2BedApt = () => {
     setStatus(twoBedApt);
@@ -112,9 +127,8 @@ function Products() {
   };
 
   useEffect(() => {
-    console.log(itemLimit);
-    setStatus(oneBedApt.splice(0, itemLimit));
-  }, [itemLimit]);
+    setStatus(oneBedApt.splice(0, oneAptLimit));
+  }, [oneAptLimit]);
 
   return (
     <div>
@@ -250,7 +264,7 @@ function Products() {
             ) : (
               <button
                 onClick={() => {
-                  setItemLimit(itemLimit + 4);
+                  setOneAptLimit(oneAptLimit + 4);
                 }}
                 className="btn btn-danger d-block mx-auto"
               >
@@ -259,7 +273,28 @@ function Products() {
             )}
           </div>
           <div className="col-lg-3 order-xl-last order-lg-last order-sm-first order-md-first order-xs-first pt-5 bg-white">
+            <h2 className="text-info">SEARCH</h2>
+            <hr />
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Apartment's code"
+                aria-label="Apartment's code"
+                aria-describedby="button-addon2"
+                onChange={onSearch}
+              />
+              <button
+                class="btn btn-outline-info"
+                type="button"
+                id="button-addon2"
+                onClick={searchFunction}
+              >
+                Search
+              </button>
+            </div>
             <h2 className="text-info">FILTER</h2>
+
             <hr />
 
             <div className="row">
