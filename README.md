@@ -8,19 +8,19 @@
 
 ## Day 2
 
-[x] Preparing ProductCard Component with using Bootstrap 5.
+- [x] Preparing ProductCard Component with using Bootstrap 5.
 
-[x] After finishing Cards filtering the data for showing just Reserved or Sold Apartments.
+- [x] After finishing Cards filtering the data for showing just Reserved or Sold Apartments.
 
-[x] Adding another filter option for filtering.(to show just 1 Bed Apartment ones or 3 Bed Pool ones.)
+- [x] Adding another filter option for filtering.(to show just 1 Bed Apartment ones or 3 Bed Pool ones.)
 
 ## Day 3
 
-[x] Adding a Search input and stating a state for that input's value changes.
+- [x] Adding a Search input and stating a state for that input's value changes.
 
-[x] with that Search input now we can filter data with apartment's code name.
+- [x] with that Search input now we can filter data with apartment's code name.
 
-[x] Putting filter options into a accordion to make them look better.
+- [x] Putting filter options into a accordion to make them look better.
 
-[x] Adding dark&light mode with using a switcher.
+- [x] Adding dark&light mode with using a switcher.
 
