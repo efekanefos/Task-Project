@@ -4,7 +4,7 @@
 
 ## Day 1
 
-[x] Getting data from API and visualizing it on the screen.
+- [x] Getting data from API and visualizing it on the screen.
 
 ## Day 2
 
