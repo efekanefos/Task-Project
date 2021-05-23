@@ -25,10 +25,10 @@ function Search(props) {
     >
       <h2 className="text-info">SEARCH</h2>
       <hr />
-      <div class="input-group mb-3">
+      <div className="input-group mb-3">
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           placeholder="Apartment's code"
           aria-label="Apartment's code"
           aria-describedby="button-addon2"
@@ -36,7 +36,7 @@ function Search(props) {
           onChange={onSearch}
         />
         <button
-          class="btn btn-outline-info"
+          className="btn btn-outline-info"
           type="button"
           id="button-addon2"
           onClick={searchFunction}
