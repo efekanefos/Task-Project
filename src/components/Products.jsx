@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../components/Products.css";
+import Search from "./Search";
 import bed1apt from "../property_thumbs/1-bed-apt/i1.jpg";
 import bed2apt from "../property_thumbs/2-bed-apt/i1.jpg";
 import bed3apt from "../property_thumbs/3-bed-apt/i1.jpg";
@@ -10,13 +11,14 @@ import bed3ph from "../property_thumbs/3-bed-ph/i1.jpg";
 import bed3pool from "../property_thumbs/3-bed-pool/i1.jpg";
 import studio from "../property_thumbs/studio/i1.jpg";
 
-function Products() {
-  const [oneAptLimit, setOneAptLimit] = useState(4);
-  const [searchQuery, setSearchQuery] = useState("");
+function Products(props) {
+  //const [oneAptLimit, setOneAptLimit] = useState(4);
+  //const [searchQuery, setSearchQuery] = useState("");
+  const [mode, setMode] = useState("dark");
   const [result, setResult] = useState([]);
   const [status, setStatus] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  /*
   const onSearch = (e) => {
     setSearchQuery(e.target.value);
     console.log(searchQuery);
@@ -29,7 +31,9 @@ function Products() {
   const searchFunction = () => {
     setStatus(filteredHomes);
     console.log(filteredHomes);
+    setSearchQuery("");
   };
+  */
 
   useEffect(() => {
     var requestOptions = {
@@ -49,6 +53,7 @@ function Products() {
   /*
   Filtering by Status ID Start
   */
+  let All = result;
   let Available = result.filter((item) => item.status_id === 1);
   let Reserved = result.filter((item) => item.status_id === 2);
   let Sold = result.filter((item) => item.status_id === 3);
@@ -59,6 +64,9 @@ function Products() {
   /*
   Status onClick Functions Start 
  */
+  let onAll = () => {
+    setStatus(All);
+  };
   let onAvailable = () => {
     setStatus(Available);
   };
@@ -99,7 +107,8 @@ function Products() {
   Filtering by RoomType End
   */
   let on1BedApt = () => {
-    setStatus(oneBedApt.splice(0, oneAptLimit));
+    setStatus(oneBedApt);
+    //setStatus(oneBedApt.splice(0, oneAptLimit));
   };
   let on2BedApt = () => {
     setStatus(twoBedApt);
@@ -125,16 +134,28 @@ function Products() {
   let onStudio = () => {
     setStatus(studioFilter);
   };
-
+  /*
   useEffect(() => {
     setStatus(oneBedApt.splice(0, oneAptLimit));
   }, [oneAptLimit]);
+ */
+
+  const switchMode = () => {
+    mode === "light" ? setMode("dark") : setMode("light");
+  };
 
   return (
     <div>
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-9 order-xl-first order-lg-first order-md-last order-sm-last order-last productBg">
+        <div
+          className="row"
+          style={
+            mode === "light"
+              ? { backgroundColor: "#f0f0f0" }
+              : { backgroundColor: "#121212" }
+          }
+        >
+          <div className="col-lg-9 order-xl-first order-lg-first order-md-last order-sm-last order-last">
             {loading ? (
               <div className="text-center pt-5 mt-5">
                 <div className="spinner-border text-info" role="status">
@@ -148,7 +169,15 @@ function Products() {
                     key={index}
                     className="col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-12 float-start px-2 py-2 mt-3"
                   >
-                    <div className="card" id="hoverCard">
+                    <div
+                      className="card border-0 "
+                      style={
+                        mode === "light"
+                          ? { backgroundColor: "white" }
+                          : { backgroundColor: "#404040" }
+                      }
+                      id="hoverCard"
+                    >
                       {item.room_type.label === "3 Bed Pool" ? (
                         <img
                           src={bed3pool}
@@ -184,10 +213,21 @@ function Products() {
                       )}
 
                       <div className="card-body d-flex justify-content-center align-items-center py-0 pt-2">
-                        <h5 className="card-title text-info ">{item.code}</h5>
+                        <h5 className="card-title text-info mb-0 pb-0">
+                          {item.code}
+                        </h5>
                       </div>
-                      <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
+                      <hr />
+
+                      <ul className="list-group list-group-flush pt-0 mt-0">
+                        <li
+                          className="list-group-item pt-0 mt-0"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
                           <small>
                             FLOOR TYPE
                             <span className="float-end">
@@ -195,44 +235,82 @@ function Products() {
                             </span>
                           </small>
                         </li>
-                        <div id="afterHover">
-                          <li className="list-group-item">
-                            <small>
-                              INTERNAL
-                              <span className="float-end">{item.net_area}</span>
-                            </small>
-                          </li>
-                          <li className="list-group-item">
-                            <small>
-                              EXTERNAL
-                              <span className="float-end">{item.out_area}</span>
-                            </small>
-                          </li>
-                          <li className="list-group-item">
-                            <small>
-                              GROSS
-                              <span className="float-end">
-                                {item.gross_area}
-                              </span>
-                            </small>
-                          </li>
-                          <li className="list-group-item">
-                            <small>
-                              POOL
-                              <span className="float-end">
-                                {item.pool_area}
-                              </span>
-                            </small>
-                          </li>
-                          <li className="list-group-item">
-                            <small>
-                              ROOF
-                              <span className="float-end">
-                                {item.roof_area}
-                              </span>
-                            </small>
-                          </li>
-                        </div>
+
+                        <li
+                          className="list-group-item"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
+                          <small>
+                            INTERNAL
+                            <span className="float-end">
+                              {item.net_area} m²
+                            </span>
+                          </small>
+                        </li>
+                        <li
+                          className="list-group-item"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
+                          <small>
+                            EXTERNAL
+                            <span className="float-end">
+                              {item.out_area} m²
+                            </span>
+                          </small>
+                        </li>
+                        <li
+                          className="list-group-item"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
+                          <small>
+                            GROSS
+                            <span className="float-end">
+                              {item.gross_area} m²
+                            </span>
+                          </small>
+                        </li>
+                        <li
+                          className="list-group-item"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
+                          <small>
+                            POOL
+                            <span className="float-end">
+                              {item.pool_area} m²
+                            </span>
+                          </small>
+                        </li>
+                        <li
+                          className="list-group-item"
+                          style={
+                            mode === "light"
+                              ? { backgroundColor: "white", color: "black" }
+                              : { backgroundColor: "#404040", color: "white" }
+                          }
+                        >
+                          <small>
+                            ROOF
+                            <span className="float-end">
+                              {item.roof_area} m²
+                            </span>
+                          </small>
+                        </li>
 
                         {item.status_id === 1 ? (
                           <li className="list-group-item text-center px-0 text-white bg-success">
@@ -259,9 +337,10 @@ function Products() {
                 );
               })
             )}
+            {/* 
             {loading ? (
               ""
-            ) : (
+            ) : status === oneBedApt.splice(0, oneAptLimit) ? (
               <button
                 onClick={() => {
                   setOneAptLimit(oneAptLimit + 4);
@@ -270,34 +349,53 @@ function Products() {
               >
                 Daha Fazla Göster
               </button>
+            ) : (
+              ""
             )}
+            */}
           </div>
-          <div className="col-lg-3 order-xl-last order-lg-last order-sm-first order-md-first order-xs-first pt-5 bg-white">
-            <h2 className="text-info">SEARCH</h2>
-            <hr />
-            <div class="input-group mb-3">
+          <div
+            style={
+              mode === "light"
+                ? { backgroundColor: "white" }
+                : { backgroundColor: "#282828" }
+            }
+            className="col-lg-3 order-xl-last order-lg-last order-sm-first order-md-first order-xs-first pt-5"
+          >
+            {/* search burda */}
+            <Search result={result} mode={mode} setStatus={setStatus} />
+
+            <div class="form-check form-switch d-flex align-items-center">
               <input
-                type="text"
-                class="form-control"
-                placeholder="Apartment's code"
-                aria-label="Apartment's code"
-                aria-describedby="button-addon2"
-                onChange={onSearch}
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckChecked"
+                onClick={switchMode}
               />
-              <button
-                class="btn btn-outline-info"
-                type="button"
-                id="button-addon2"
-                onClick={searchFunction}
-              >
-                Search
-              </button>
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                {mode === "light" ? (
+                  <span className="text-dark fs-3 ms-2">
+                    <i style={{ color: "#FC9601" }} class="fas fa-sun"></i>
+                  </span>
+                ) : (
+                  <span className="text-light fs-3 ms-2">
+                    <i class="fas fa-moon"></i>
+                  </span>
+                )}
+              </label>
             </div>
             <h2 className="text-info">FILTER</h2>
 
             <hr />
 
-            <div className="row">
+            <div
+              className="row"
+              style={
+                mode === "light"
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#282828" }
+              }
+            >
               {/* Accordion Start */}
               <div className="accordion" id="accordionExample1">
                 <div className="accordion-item">
@@ -328,6 +426,18 @@ function Products() {
                                 className="form-check-input border-info"
                                 type="radio"
                                 name="flexRadioDefault"
+                                id="All"
+                                onClick={onAll}
+                              />
+                              <label className="form-check-label" htmlFor="All">
+                                All
+                              </label>
+                            </div>
+                            <div className="form-check">
+                              <input
+                                className="form-check-input border-info"
+                                type="radio"
+                                name="flexRadioDefault"
                                 id="flexRadioDefault1"
                                 onClick={onAvailable}
                               />
@@ -338,6 +448,7 @@ function Products() {
                                 Available
                               </label>
                             </div>
+
                             <div className="form-check">
                               <input
                                 className="form-check-input border-info"
@@ -497,10 +608,12 @@ function Products() {
                         </div>
 
                         <div className="col-6">
+                          {/* */}
                           <div className="form-check">
                             <input
-                              className="form-check-input border-info"
+                              className="form-check-input border-info "
                               type="radio"
+                              disabled
                               name="flexRadioDefault"
                               id="1Bedph"
                               onClick={on1Bedph}
